@@ -1,5 +1,5 @@
 ---
-name: Library/ilkersigirci/styles/zen-base16
+name: Library/ilkersigirci/styles/base16-zen
 tags: meta/library
 ---
 # ==Zen Base16== Theme
