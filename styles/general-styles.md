@@ -6,13 +6,11 @@ tags: meta/library
 # General Styles
 
 Increase editor width
-
 ```space-style
 html {--editor-width: 1000px;}
 ```
 
 OfflineMode Badge
-
 ```space-style
 #sb-top.sb-sync-error {
     position: relative;
@@ -36,4 +34,10 @@ OfflineMode Badge
   backdrop-filter: blur(10px) saturate(200%);
   -webkit-backdrop-filter: blur(10px) saturate(100%);
 }
+```
+
+Widget’s TopRight Buttons are moved outside the Widget window
+```space-style
+#sb-main .cm-editor .sb-lua-directive-block .button-bar { top: -40px; padding:0; border-radius: 2em; opacity:0.2; transition: all 0.5s ease;}
+#sb-main .cm-editor .sb-lua-directive-block .button-bar:hover { opacity:1;}
 ```
