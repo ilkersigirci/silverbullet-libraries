@@ -33,12 +33,6 @@ description: General Styles for SilverBullet
 website: https://github.com/ilkersigirci/silverbullet-libraries
 uri: https://github.com/ilkersigirci/silverbullet-libraries/blob/main/styles/general-styles.md
 ---
-name: Saving Indicator
-author: Ilker SIGIRCI
-description: Animate when saving file
-website: https://github.com/ilkersigirci/silverbullet-libraries
-uri: https://github.com/ilkersigirci/silverbullet-libraries/blob/main/styles/saving-indicator.md
----
 name: Mobile Toolbar
 author: Ilker SIGIRCI
 description: Mobile Toolbar
