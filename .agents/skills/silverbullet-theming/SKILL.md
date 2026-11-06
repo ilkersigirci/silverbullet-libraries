@@ -181,6 +181,7 @@ Useful probes (`--eval`, add `--out -` to skip screenshots):
   - In the repo, keep `styles/<theme>.md` next to `styles/<theme>/`. In the space they land at `Library/<author>/styles/<theme>/…`, so reference them as `url(".fs/Library/<author>/styles/<theme>/MyFont.woff2")`.
   - Redistributed fonts need their licence alongside (SIL OFL requires it), so ship it as one of the `files`.
   - Commit the asset files to the repo yourself; `Share: Page` only pushes the page.
+- **Options without branching:** make an option a `0`/`1` variable and multiply it into `calc()` for lengths, radii and opacity (e.g. Baseline's `--bl-widget-buttons-outside`). `display` can't be computed, so fade with `opacity` instead of toggling `display`. Users flip it with one line at `priority: -20`.
 - **Fonts from other libraries:** to reuse a font another library declares (e.g. `FiraCodeVariable` from `styles/font.md`), name its family first in your stack with system fallbacks after it. Don't add your own `@font-face` pointing at someone else's file path.
 - **Installed copies are pull-mode:** after a push, users get the new version through `Library: Update`. If their copy was edited locally, SB asks before overwriting it.
 

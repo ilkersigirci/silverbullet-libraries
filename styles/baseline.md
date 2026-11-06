@@ -29,11 +29,14 @@ html[data-theme]:root {
   --bl-font-text: "OpenSansVariable", sans-serif;  /* any loaded family, e.g. the Font library's */
   --bl-line-width: 900px;          /* wider pages */
   --bl-text-size: 17px;
+  --bl-widget-buttons-outside: 0;  /* keep widget buttons inside the widget's corner */
 }
 html[data-theme="light"]:root { --bl-accent: #2f6fe4; }
 ```
 
 (That example is a plain `css` block, so it does nothing here; paste it into a `space-style` block to use it.)
+
+**Options:** `--bl-widget-buttons-outside` (default `1`) puts the buttons of block widgets (queries, Mermaid, KaTeX…) above the widget's top-right corner, faint until you hover or focus the widget. Set it to `0` to keep them inside the corner, as in SilverBullet.
 
 To turn the theme off, delete this page and its `baseline/` folder, or rename the `space-style` fences on this page to `css` (a later `Library: Update` asks before overwriting local edits).
 
@@ -97,6 +100,15 @@ html:root {
 
   /* Layout */
   --bl-line-width: 740px;
+
+  /* Options */
+  --bl-widget-buttons-outside: 1;  /* widget buttons: 1 = above the widget's corner, 0 = inside it (SilverBullet's default) */
+  --bl-widget-bar-height: 26px;
+}
+@media (pointer: coarse) {
+  html:root {
+    --bl-widget-bar-height: 32px;  /* bigger tap targets */
+  }
 }
 
 html[data-theme="light"]:root {
@@ -396,7 +408,7 @@ html #sb-root {
   font-family: var(--bl-font-ui);
   font-weight: var(--bl-semibold);
   letter-spacing: -0.01em;
-  color: var(--bl-text-normal);
+  /* colour inherits from .sb-saved / .sb-unsaved (--top-saved-color / --top-unsaved-color) */
 }
 #sb-root #sb-top .sb-actions {
   align-items: center;
@@ -1070,6 +1082,55 @@ Markdown tables, query results and Lua widget tables share Baseline's look: plai
 }
 #sb-root #sb-main .cm-editor :is(.sb-markdown-widget, .sb-lua-directive-block, .sb-lua-directive-inline) .button-bar button {
   color: var(--bl-text-muted);
+}
+
+/* Block widget buttons (queries, KaTeX, Mermaid…). Core toggles display on hover;
+   Baseline fades instead, so the bar can sit above the widget (--bl-widget-buttons-outside: 1),
+   faint until the widget is hovered or focused, or inside its corner (0) like SilverBullet.
+   Outside, widgets get a little top margin so the bar sits in clear space. */
+#sb-root #sb-main .cm-editor .sb-lua-directive-block:not(.sb-lua-view, .sb-frontmatter-preview *) {
+  margin-top: calc(var(--bl-widget-buttons-outside) * (var(--bl-widget-bar-height) - 20px));
+}
+#sb-root #sb-main .cm-editor .sb-lua-directive-block:not(.sb-lua-view, .sb-frontmatter-preview *) > div > .button-bar {
+  display: flex !important;
+  align-items: center;
+  gap: 2px;
+  height: var(--bl-widget-bar-height);
+  padding: 0 4px;
+  top: calc(var(--bl-widget-buttons-outside) * (-1 * var(--bl-widget-bar-height) - 2px));
+  z-index: 2;
+  border-radius:
+    calc(var(--bl-widget-buttons-outside) * var(--bl-radius-s)) var(--bl-radius-s)
+    calc(var(--bl-widget-buttons-outside) * var(--bl-radius-s)) var(--bl-radius-s);
+  opacity: calc(var(--bl-widget-buttons-outside) * 0.35);
+  transition: opacity 150ms ease;
+}
+@media (hover: none) {
+  /* touch: no hover, so inside buttons stay visible (as in SilverBullet) */
+  #sb-root #sb-main .cm-editor .sb-lua-directive-block:not(.sb-lua-view, .sb-frontmatter-preview *) > div > .button-bar {
+    opacity: calc(1 - var(--bl-widget-buttons-outside) * 0.65);
+  }
+}
+#sb-root #sb-main .cm-editor .sb-lua-directive-block:not(.sb-lua-view, .sb-frontmatter-preview *):is(:hover, :focus-within) > div > .button-bar {
+  opacity: 1;
+}
+#sb-root #sb-main .cm-editor .sb-lua-directive-block:not(.sb-lua-view, .sb-frontmatter-preview *) > div > .button-bar button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: calc(var(--bl-widget-bar-height) - 2px);
+  height: calc(var(--bl-widget-bar-height) - 2px);
+  margin: 0;
+  padding: 0;
+  border-radius: var(--bl-radius-xs);
+}
+#sb-root #sb-main .cm-editor .sb-lua-directive-block:not(.sb-lua-view, .sb-frontmatter-preview *) > div > .button-bar button:hover {
+  color: var(--bl-text-normal);
+  background-color: var(--bl-hover);
+}
+#sb-root #sb-main .cm-editor .sb-lua-directive-block:not(.sb-lua-view, .sb-frontmatter-preview *) > div > .button-bar button svg {
+  width: 15px;
+  height: 15px;
 }
 
 /* Command buttons rendered in pages, e.g. widgets.commandButton */

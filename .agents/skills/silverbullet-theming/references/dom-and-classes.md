@@ -99,6 +99,7 @@ Inline classes:
 | --- | --- |
 | Lua expression results | `span.sb-lua-wrapper > div.sb-lua-directive-inline` (inline) or `> div.sb-lua-directive-block` (block). Query tables are plain tables, `….sb-lua-directive-block .content .wrapper > table > thead th` |
 | Markdown widgets | `.sb-markdown-widget`, `.sb-lua-top-widget` / `.sb-lua-bottom-widget` (page decorations) |
+| Widget button bars | Block widgets (queries, KaTeX, Mermaid…) put theirs in `.sb-lua-directive-block > div > .button-bar` (absolute, top-right). Core keeps it `display: none` until the widget is hovered, with `display: block !important` on touch. The frontmatter preview and `.sb-lua-view` bars fade with opacity instead |
 | Command buttons | `widgets.commandButton(...)` renders `.sb-lua-directive-inline > button` (coloured by `--editor-command-button-*`); `.button-bar` holds widget toolbars |
 | Page widgets (linked mentions etc.) | `.sb-page-widget`, `-heading`, `-body`, `-bar`, `-tools`, `-fold`, `-collapsed` |
 | Loading states | `.sb-loading-widget(-block/-inline)` |
