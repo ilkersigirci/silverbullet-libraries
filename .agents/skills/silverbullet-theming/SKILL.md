@@ -98,6 +98,7 @@ These notes were written against **SB 2.12.1**. When the version changes, re-che
   - Write `url(".fs/Library/<author>/styles/<theme>/x.woff2")`. It resolves against `<base href="/<prefix>/">`, while an absolute `/.fs/…` 404s when SB is served under a URL prefix.
   - Ship fonts and other assets with the library through `files:` (see Shipping) instead of asking users to copy them.
 - **Icons** that follow the text colour: `background-color: currentColor; mask: var(--icon) center / contain no-repeat;` with a data-URI SVG in `--icon`. Include `-webkit-mask` too.
+- **Sync-error (offline) state.** Core paints the whole `#sb-top` with `--top-sync-error-background-color` (pale yellow in light, dark red in dark). If your layout turns only part of `#sb-top` into a card, reset `#sb-top.sb-sync-error`'s background and tint the card part instead, and map the colour to your palette.
 - **Modal backdrop.** `--modal-backdrop-color` is transparent by default, so set it if pickers should dim the page.
 - **Sidebars share the modal background.** Every `.sb-nav-root` (tree, TOC, page picker, command palette) is painted with `--modal-background-color`; `--panel-background-color` only covers `.sb-panel`. For sidebars that differ from pickers, set `background-color` on `#sb-root #sb-main .sb-nav-root-lhs/-rhs`.
 - **Empty `:has()` states.** `#sb-root:not(:has(#sb-main > .sb-nav-root))` means "no sidebar open", which is useful for full-bleed layouts. A closed sidebar is removed from the DOM, not hidden.
@@ -138,6 +139,7 @@ Then read the PNGs. A fresh browser has no saved view state, so the sidebars onl
 | No sidebars | `--click ".sb-nav-root-lhs .sb-nav-close" --click ".sb-nav-root-rhs .sb-nav-close"` |
 | Page picker | `--press Control+k` |
 | Command palette | `--press Control+/ --type nav` |
+| Offline / sync error | `--offline 10000` (cuts the network; SB adds `.sb-sync-error` to `#sb-top`) |
 | Long pages | `--scroll 0,900,1800,…` (one PNG per offset) |
 
 Useful probes (`--eval`, add `--out -` to skip screenshots):

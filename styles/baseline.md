@@ -251,6 +251,7 @@ html[data-theme]:root {
   --top-saved-color: var(--bl-text-normal);
   --top-unsaved-color: var(--bl-text-muted);
   --top-loading-color: var(--bl-text-faint);
+  --top-sync-error-background-color: color-mix(in srgb, var(--bl-red) 22%, var(--bl-card-bg));
 
   --panel-background-color: var(--bl-chrome-bg);
   --panel-border-color: transparent;
@@ -480,6 +481,10 @@ html #sb-root {
     border-top: 0;
     border-radius: 0 0 var(--bl-radius-s) var(--bl-radius-s);
     overflow: hidden;
+  }
+  /* Sync error (offline): core paints all of #sb-top; tint only the card's title strip */
+  #sb-root #sb-top.sb-sync-error {
+    background-color: var(--bl-chrome-bg);
   }
   #sb-root #sb-top.sb-sync-error .main {
     background-color: var(--top-sync-error-background-color);

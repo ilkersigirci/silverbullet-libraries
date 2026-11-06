@@ -15,6 +15,7 @@
 //   --type TEXT         type text into the focused element          (repeatable)
 //   --click SELECTOR    click the first match, if any               (repeatable)
 //   --hover SELECTOR    hover the first match, if any               (repeatable)
+//   --offline MS        cut the network, then wait MS for SB to show its sync-error state
 //   --scroll Y[,Y...]   scroll the editor to each Y and take one screenshot per offset
 //   --eval JS           evaluate an expression at the end and print the result as JSON
 //   --out PREFIX        screenshot path prefix (default ./shot; writes PREFIX.png or PREFIX-<Y>.png); "-" = none
@@ -43,7 +44,7 @@ for (let i = 0; i < argv.length; i++) {
   const key = argv[i].replace(/^--/, "");
   const val = argv[++i];
   if (val === undefined) { console.error(`missing value for --${key}`); process.exit(2); }
-  if (["press", "type", "click", "hover"].includes(key)) actions.push([key, val]);
+  if (["press", "type", "click", "hover", "offline"].includes(key)) actions.push([key, val]);
   else if (key in opts) opts[key] = val;
   else { console.error(`unknown option --${key}`); process.exit(2); }
 }
@@ -84,6 +85,10 @@ await page.evaluate(async () => { if (document.fonts) await document.fonts.ready
 for (const [kind, val] of actions) {
   if (kind === "press") await page.keyboard.press(val);
   else if (kind === "type") await page.keyboard.type(val);
+  else if (kind === "offline") {
+    await ctx.setOffline(true);
+    await page.waitForTimeout(+val || 5000);
+  }
   else {
     const el = await page.$(val);
     if (!el) console.error(`no element for ${kind} ${val}`);
