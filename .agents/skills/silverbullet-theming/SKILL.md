@@ -98,6 +98,7 @@ These notes were written against **SB 2.12.1**. When the version changes, re-che
   - Write `url(".fs/Library/<author>/styles/<theme>/x.woff2")`. It resolves against `<base href="/<prefix>/">`, while an absolute `/.fs/…` 404s when SB is served under a URL prefix.
   - Ship fonts and other assets with the library through `files:` (see Shipping) instead of asking users to copy them.
 - **Icons** that follow the text colour: `background-color: currentColor; mask: var(--icon) center / contain no-repeat;` with a data-URI SVG in `--icon`. Include `-webkit-mask` too.
+- **Phone hamburger menu.** On mobile clients, `.sb-actions.hamburger` is a column inside the top-bar row that grows downward when opened. If you vertically centre the row (`align-items: center`), the title jumps to the middle of the open menu. Pin the row's height to the closed button (`calc(2.2rem + 4px)`) and give the menu `align-self: flex-start`.
 - **Sync-error (offline) state.** Core paints the whole `#sb-top` with `--top-sync-error-background-color` (pale yellow in light, dark red in dark). If your layout turns only part of `#sb-top` into a card, reset `#sb-top.sb-sync-error`'s background and tint the card part instead, and map the colour to your palette.
 - **Modal backdrop.** `--modal-backdrop-color` is transparent by default, so set it if pickers should dim the page.
 - **Sidebars share the modal background.** Every `.sb-nav-root` (tree, TOC, page picker, command palette) is painted with `--modal-background-color`; `--panel-background-color` only covers `.sb-panel`. For sidebars that differ from pickers, set `background-color` on `#sb-root #sb-main .sb-nav-root-lhs/-rhs`.
@@ -136,6 +137,7 @@ Then read the PNGs. A fresh browser has no saved view state, so the sidebars onl
 | Light / dark | `--scheme light` / `--scheme dark` |
 | Phone | `--size 390x844` (touch and mobile emulation below 700px wide) |
 | Phone drawer | `--size 390x844 --click "#sb-top .sb-mobile-dock-left"` |
+| Phone menu (open) | `--size 390x844 --click "#sb-top .sb-actions.hamburger button.expander"` |
 | No sidebars | `--click ".sb-nav-root-lhs .sb-nav-close" --click ".sb-nav-root-rhs .sb-nav-close"` |
 | Page picker | `--press Control+k` |
 | Command palette | `--press Control+/ --type nav` |

@@ -536,6 +536,15 @@ html #sb-root {
     border-radius: var(--bl-radius-m) 0 0 var(--bl-radius-m);
     box-shadow: var(--bl-shadow-l);
   }
+  /* The hamburger menu grows downward in the flow when opened. Fix the row to the
+     closed button's height so the centred title and buttons stay put, and let the
+     open menu overflow below it (2.2rem + 2px margin is core's closed menu). */
+  #sb-root #sb-top .main .inner .wrapper:has(.sb-actions.hamburger) {
+    height: calc(2.2rem + 4px);
+  }
+  #sb-root #sb-top .sb-actions.hamburger {
+    align-self: flex-start;
+  }
 }
 ```
 
