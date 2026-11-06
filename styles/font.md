@@ -5,7 +5,7 @@ tags: meta/library
 
 # Font
 
-To reference static files in your space, add `.fs/` to the start of the URL path (in other words, `src: url('/.fs/fonts/...');`). Do not create a `.fs/` directory on disk in the `SilverBullet` space itself.
+To reference static files in your space, start the URL with `.fs/` and no leading slash (for example `src: url('.fs/Fonts/...');`). Relative URLs also work when SilverBullet is served under a URL prefix such as `/notes`, where an absolute `/.fs/...` URL returns 404. Do not create a `.fs/` directory on disk in the `SilverBullet` space itself.
 
 Learn more in the “File system” section of the [HTTP API docs](https://silverbullet.md/HTTP%20API).
 
@@ -22,7 +22,7 @@ Adapted from [Mr-xRed set-custom-font](https://gist.github.com/Mr-xRed/c81f6494b
 
 @font-face {
     font-family: "OpenSansVariable";
-    src: url('/.fs/Fonts/OpenSansVar.ttf') format('truetype'); 
+    src: url('.fs/Fonts/OpenSansVar.ttf') format('truetype'); 
     /* This tells the browser this font supports a range of weights */
     font-weight: 300 900; 
     /* This tells the browser this font supports a range of widths (Condensed to Normal) */
@@ -32,7 +32,7 @@ Adapted from [Mr-xRed set-custom-font](https://gist.github.com/Mr-xRed/c81f6494b
 
 @font-face {
     font-family: "FiraCodeVariable";
-    src: url('/.fs/Fonts/FiraCodeVar.ttf') format('truetype');
+    src: url('.fs/Fonts/FiraCodeVar.ttf') format('truetype');
     /* Fira Code VF usually supports 300 to 700 */
     font-weight: 300 700;
     font-style: normal;
