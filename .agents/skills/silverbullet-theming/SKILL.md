@@ -86,6 +86,8 @@ These notes were written against **SB 2.12.1**. When the version changes, re-che
 - **Hidden delimiter lines.**
   - Fence and frontmatter marker lines carry `sb-line-code-outside` / `sb-line-frontmatter-outside`, and their text is transparent until the cursor enters.
   - Recolouring `.sb-meta` or the code colour un-hides them, so re-assert `color: transparent` on them at higher specificity.
+- **Admonition markers.** Core hides the raw `[!TYPE]` / `**type**` marker only for note, warning, danger and success. Hide `#sb-root #sb-main .cm-editor .sb-admonition-type > *` yourself, or `> [!TIP]` titles show the marker text.
+- **Test without overlapping libraries too.** An installed library (e.g. an admonitions library) can mask gaps in your theme. Screenshot a scratch space that contains only your theme and its real dependencies.
 - **Rendered fences** (Mermaid and similar) show as an `sb-fenced-code-iframe` line, with the hidden raw lines marked `sb-line-table-outside`. Exclude them from code-block panels, or you get a double frame.
 - **Code needs its own font.** Core has no code-font variable (`--editor-monospace-font` only covers conflict sections). With a proportional `--editor-font`, give `.sb-code` and `.cm-line.sb-line-fenced-code` a monospace `font-family` explicitly.
 - **Checkboxes.** `<input type=checkbox>` doesn't inherit `font-size`. Set `font-size: inherit` before sizing it in `em`.

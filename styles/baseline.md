@@ -914,6 +914,11 @@ html:root {
   mask: var(--bl-callout-icon) center / contain no-repeat;
 }
 
+/* Hide the raw "[!TIP]" / "**tip**" marker (core only does this for note, warning, danger and success) */
+#sb-root #sb-main .cm-editor .sb-admonition-type > * {
+  display: none;
+}
+
 /* A custom title already starts with a space */
 #sb-root #sb-main .cm-editor .sb-admonition-type:not(:last-child)::before {
   margin-right: 4px !important;
