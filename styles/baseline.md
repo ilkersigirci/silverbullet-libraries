@@ -432,6 +432,16 @@ html #sb-root {
   width: 18px;
   height: 18px;
 }
+/* The account button (accounts servers) holds a 26px avatar, not an 18px icon. Keep
+   core's 2px padding and flex centring for it over the 7px above: in the phone menu,
+   where core lays buttons out as blocks, the avatar otherwise sits off-centre and
+   the menu clips its bottom. */
+#sb-root #sb-top .sb-actions button:has(.sb-profile-avatar) {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2px;
+}
 #sb-root #sb-top .progress-wrapper,
 #sb-root #sb-top .progress-hole {
   background-color: var(--bl-card-bg);

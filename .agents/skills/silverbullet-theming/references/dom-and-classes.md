@@ -32,7 +32,8 @@ These also appear when needed: `.sb-panel` (Lua/plug panels, iframes), `.sb-nav-
   - The sidebars become absolutely positioned drawers over the editor.
   - The `button.sb-mobile-dock-button.sb-mobile-dock-left` / `-right` in `#sb-top` (always in the DOM) become visible and open the drawers.
   - `.sb-keyboard-bar` is the on-screen toolbar.
-  - SB treats any client without a fine pointer as mobile (phone emulation in `sbshot.mjs` counts). With the `mobileMenuStyle` config at its default `"hamburger"`, dropdown actions move into `.sb-actions.hamburger` (`.open` while expanded, first button `.expander`); `"bottom-bar"` gives `.sb-actions.bottom-bar` instead.
+  - SB treats any client without a fine pointer as mobile (phone emulation in `sbshot.mjs` counts). With the `mobileMenuStyle` config at its default `"hamburger"`, dropdown actions move into `.sb-actions.hamburger` (`.open` while expanded, first button `.expander`); `"bottom-bar"` gives `.sb-actions.bottom-bar` instead. Core lays the menu's buttons out as `display: block`.
+  - On servers with accounts, the reserved `profile` action button renders `span.sb-profile-avatar` (26px or larger) instead of an svg. Core styles `.sb-actions button:has(.sb-profile-avatar)` with 2px padding and flex centring. A theme that pads every action button for 18px icons must restore that, or the avatar sits off-centre and the open hamburger clips it. Preview servers have no accounts, so fake one in the browser: answer `.config` with `accountManaged: true`, `/.auth/central/public` with 404, and `/.dashboard/api/profile` with `{"username": …, "fullName": …}`.
 - **Variables set by JavaScript:**
   - `--sb-editor-pane-left/-width` and `--sb-viewport-height/-top`.
   - `html.sb-viewport-tracked` while the mobile keyboard is open.
