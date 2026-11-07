@@ -1132,6 +1132,11 @@ Markdown tables, query results and Lua widget tables share Baseline's look: plai
   width: 15px;
   height: 15px;
 }
+/* A fenced block rendered as a widget (```mermaid) keeps core's code-copy button on its line,
+   where it lands on the widget's bar. The bar has its own Copy, so hide the duplicate. */
+#sb-root #sb-main .cm-editor .cm-line.sb-fenced-code-iframe:has(.button-bar > [data-button="copy"]) > .sb-actions {
+  display: none;
+}
 
 /* Command buttons rendered in pages, e.g. widgets.commandButton */
 #sb-root #sb-main .cm-editor .sb-lua-directive-inline > button,
