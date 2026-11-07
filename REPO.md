@@ -47,7 +47,7 @@ uri: https://github.com/ilkersigirci/silverbullet-libraries/blob/main/styles/bas
 ---
 name: General Fixes
 author: Ilker SIGIRCI
-description: Behaviour fixes for SilverBullet, such as opening the keyboard with the page picker, command palette and Silversearch on Android
+description: Fixes for SilverBullet bugs, such as opening the keyboard with the page picker, command palette and Silversearch on Android, and the vim status bar showing over modals
 website: https://github.com/ilkersigirci/silverbullet-libraries
 uri: https://github.com/ilkersigirci/silverbullet-libraries/blob/main/scripts/general-fixes.md
 ```

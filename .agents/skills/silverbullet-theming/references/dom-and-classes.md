@@ -20,9 +20,13 @@ html[data-theme="light|dark"][data-markdown-syntax-rendering="on|off"]
   │ │  ├ .sb-nav-root.sb-nav-root-lhs.sb-nav-resizable   page tree (absent from the DOM when closed)
   │ │  │   └ .sb-resizer.sb-resizer-lhs
   │ │  ├ #sb-editor > .cm-editor > .cm-scroller > .cm-content.cm-lineWrapping > .cm-line …
+  │ │  │   .cm-editor > .cm-panels-bottom   vim bar, Ctrl-f search: z-index 300 (.cm-tooltip 500), which core
+  │ │  │                                    leaves over drawers and modals; General Fixes isolates #sb-editor
   │ │  └ .sb-nav-root.sb-nav-root-rhs.sb-nav-resizable   table of contents (absent when closed)
   │ └ .sb-modal-backdrop > .sb-modal … > .sb-nav-root.sb-nav-root-modal
-  │                                       page picker, command palette, prompts (only while open)
+  │                                       page picker, command palette, plug modals (only while open), z-index 100.
+  │                                       Quick Capture reuses the class (.sb-capture-backdrop, z-index 1100).
+  │                                       Prompts and confirmations are <dialog>s in the top layer.
   └ div#custom-styles > style …           every space-style block, in priority order
 ```
 

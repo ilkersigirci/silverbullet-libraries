@@ -7,7 +7,7 @@ files:
 
 # General Fixes
 
-Behaviour fixes for SilverBullet 2.12+. Each fix is a small JavaScript module next to this page that checks whether it applies and does nothing otherwise, so the library is safe to install on every device. After **Library: Update**, refresh SilverBullet to load the new version.
+Fixes for SilverBullet 2.12+ bugs. Each one changes only the case it fixes, so the library is safe to install on every device. Behaviour fixes are small JavaScript modules next to this page; layout fixes are CSS. After **Library: Update**, refresh SilverBullet to load the new version.
 
 The modules load from your space, so they also work offline when `sync.documents` is on.
 
@@ -21,6 +21,12 @@ Tapping **Open page**, **Run command** or a plug's search button (for example Si
 - **Plug modals** are iframes created after your tap, and Chromium only opens the keyboard in a frame you've tapped. The fix opens the keyboard from a temporary field in the page, then moves focus to the plug's own field.
 
 Remove this fix once SilverBullet opens the keyboard for its pickers and for plug modals on Android itself.
+
+## The vim status bar shows over modals
+
+With vim mode on, the `--NORMAL--` bar at the bottom of the editor shows on top of the page picker, the command palette, plug modals such as Silversearch and, on phones, the Space tree and Table of Contents drawers. The `Ctrl-f` search bar does the same. CodeMirror, SilverBullet's editor, gives these bars a `z-index` higher than SilverBullet's own layers. The fix keeps CodeMirror's layers inside the editor with `isolation: isolate`, so whatever SilverBullet draws over the editor covers them.
+
+Remove this fix once SilverBullet keeps the editor's bars under its modals itself.
 
 ## Implementation
 
@@ -36,4 +42,11 @@ for _, module in ipairs({ "picker-keyboard.js" }) do
     print("General Fixes: could not load " .. module .. ": " .. tostring(err))
   end
 end
+```
+
+```space-style
+/* The vim status bar shows over modals: keep CodeMirror's layers inside the editor. */
+#sb-editor {
+  isolation: isolate;
+}
 ```
