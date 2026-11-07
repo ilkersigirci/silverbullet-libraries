@@ -3,6 +3,7 @@ name: Library/ilkersigirci/scripts/general-fixes
 tags: meta/library
 files:
   - general-fixes/picker-keyboard.js
+  - general-fixes/sidebar-keyboard.js
 ---
 
 # General Fixes
@@ -22,6 +23,15 @@ Tapping **Open page**, **Run command** or a plug's search button (for example Si
 
 Remove this fix once SilverBullet opens the keyboard for its pickers and for plug modals on Android itself.
 
+## Tapping the Space tree opens the keyboard
+
+On a phone or tablet, tapping a page, a folder or a tab (Pages, Documents, Meta) in the Space tree opens the keyboard: for a moment when the tap opens a page, for good when it doesn't. After each click SilverBullet hands focus back to the panel's **Open** field, which keeps keyboard navigation working on desktop. On a touch screen it focuses a field you never tapped. With this fix the field only takes focus when you tap it or use a keyboard, as SilverBullet already does for its page picker on touch screens.
+
+- **Applies to:** touches in the Space tree, the Table of Contents and other side panels, in every browser.
+- **Leaves alone:** the page picker and command palette, mouse clicks, and keyboards.
+
+Remove this fix once SilverBullet stops focusing the panel's field after a tap on a touch screen.
+
 ## The vim status bar shows over modals
 
 With vim mode on, the `--NORMAL--` bar at the bottom of the editor shows on top of the page picker, the command palette, plug modals such as Silversearch and, on phones, the Space tree and Table of Contents drawers. The `Ctrl-f` search bar does the same. CodeMirror, SilverBullet's editor, gives these bars a `z-index` higher than SilverBullet's own layers. The fix keeps CodeMirror's layers inside the editor with `isolation: isolate`, so whatever SilverBullet draws over the editor covers them.
@@ -34,7 +44,7 @@ Remove this fix once SilverBullet keeps the editor's bars under its modals itsel
 -- Load the fix modules shipped next to this page (see files: above) when this script loads.
 -- Not on editor:init: on a device's first start, library scripts load after that event.
 -- The browser imports each module once, so reloading scripts doesn't run a fix twice.
-for _, module in ipairs({ "picker-keyboard.js" }) do
+for _, module in ipairs({ "picker-keyboard.js", "sidebar-keyboard.js" }) do
   local ok, err = pcall(function()
     js.importFromSpace("Library/ilkersigirci/scripts/general-fixes/" .. module)
   end)
