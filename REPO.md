@@ -44,4 +44,10 @@ author: Ilker SIGIRCI
 description: A port of the Obsidian Baseline theme with a neutral greyscale palette, a floating page card, Inter and Obsidian-style callouts
 website: https://github.com/svnaxis/obsidian-baseline
 uri: https://github.com/ilkersigirci/silverbullet-libraries/blob/main/styles/baseline.md
+---
+name: General Fixes
+author: Ilker SIGIRCI
+description: Behaviour fixes for SilverBullet, such as opening the keyboard with the page picker, command palette and Silversearch on Android
+website: https://github.com/ilkersigirci/silverbullet-libraries
+uri: https://github.com/ilkersigirci/silverbullet-libraries/blob/main/scripts/general-fixes.md
 ```
