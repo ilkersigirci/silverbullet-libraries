@@ -38,6 +38,15 @@ With vim mode on, the `--NORMAL--` bar at the bottom of the editor shows on top 
 
 Remove this fix once SilverBullet keeps the editor's bars under its modals itself.
 
+## The cursor disappears at the start of headings
+
+When the cursor is on a heading, SilverBullet shows its `#` marks to the left of the text, so the heading text stays where it is. It does this whenever the editor is wider than 800px, but just above that the space left of the text is narrower than the marks, so they're cut off at the editor's edge, and so is the cursor on them. In vim mode the block cursor vanishes when `j`, `k`, `h` or `l` lands on a heading's `#`. A wider page makes it happen at more window sizes, for example Baseline with `--bl-line-width: 880px`. The fix lets the marks stick out only as far as there's room; when there isn't enough, the heading text moves right a little instead.
+
+- **Applies to:** headings in every theme, with or without vim mode.
+- **Leaves alone:** wide windows, where the marks fit, and narrow ones and phones, where SilverBullet already shows the marks inline.
+
+Remove this fix once SilverBullet fits the marks to the space left of the text itself.
+
 ## Implementation
 
 ```space-lua
@@ -58,5 +67,12 @@ end
 /* The vim status bar shows over modals: keep CodeMirror's layers inside the editor. */
 #sb-editor {
   isolation: isolate;
+}
+
+/* The cursor disappears on heading marks: hang them no further than the margin left of
+   the text. The margin is half the editor's spare width (100cqi is #sb-editor's width,
+   less 16px for a scrollbar) plus the page's 20px padding. */
+#sb-main .cm-editor .cm-line.sb-header-inside {
+  text-indent: calc(-1 * (var(--sb-indent) + min(var(--sb-header-hang), max(0px, (100cqi - var(--editor-width) - 16px) / 2) + 20px)));
 }
 ```

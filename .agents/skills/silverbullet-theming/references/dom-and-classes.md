@@ -72,7 +72,7 @@ Other UI pieces:
 
 | Content | Classes / DOM |
 | --- | --- |
-| Headings | `sb-line-h1` … `sb-line-h6`. Inline marks `.sb-h1`… The `#` marks are `.sb-meta` (`--sb-header-hang` hangs them in the margin) |
+| Headings | `sb-line-h1` … `sb-line-h6`. Inline marks `.sb-h1`… The `#` marks are `.sb-meta` (`--sb-header-hang` hangs them in the margin once `#sb-editor` is wider than 800px; with too little margin `.cm-scroller` cuts them and the cursor off, so General Fixes caps the hang to the margin. Core counts the space after the marks as 1ch, too wide for a proportional font, so Baseline sets `Nch + 0.25em`) |
 | Paragraph | plain `.cm-line` |
 | Lists | `sb-line-ul` / `sb-line-ol`, `sb-line-li`, `sb-line-li-N` (depth). Bullet is `span.cm-list-bullet`; indent via `--sb-list-indent` / `--sb-indent` |
 | Tasks | `sb-line-task`. `[ ]`/`[x]` render as `span.sb-checkbox > input[type=checkbox]`, and done text gets `.cm-task-checked`. Custom states (`[TODO]`, `[DOING]`…) stay text: `.sb-task-mark` + `span.sb-task-state[data-task-state="…"]`. Deadlines are `.sb-task-deadline` |
