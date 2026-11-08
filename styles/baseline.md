@@ -592,6 +592,18 @@ html #sb-root {
 #sb-root #sb-main .cm-editor .cm-line.sb-line-h5 { font-size: var(--bl-h5-size); font-weight: var(--bl-medium); }
 #sb-root #sb-main .cm-editor .cm-line.sb-line-h6 { font-size: var(--bl-h6-size); font-weight: var(--bl-semibold); color: var(--bl-text-muted); }
 
+/* Showing a heading's # marks shouldn't move its text. SilverBullet hangs them left by 1ch
+   per character, space included, but Inter's space is a quarter em, not 1ch, so the text
+   jumped left. Same 800px limit as SilverBullet, below which the marks show inline. */
+@container sb-editor-col (width > 800px) {
+  #sb-root #sb-main .cm-editor .sb-header-inside.sb-line-h1 { --sb-header-hang: calc(1ch + 0.25em); }
+  #sb-root #sb-main .cm-editor .sb-header-inside.sb-line-h2 { --sb-header-hang: calc(2ch + 0.25em); }
+  #sb-root #sb-main .cm-editor .sb-header-inside.sb-line-h3 { --sb-header-hang: calc(3ch + 0.25em); }
+  #sb-root #sb-main .cm-editor .sb-header-inside.sb-line-h4 { --sb-header-hang: calc(4ch + 0.25em); }
+  #sb-root #sb-main .cm-editor .sb-header-inside.sb-line-h5 { --sb-header-hang: calc(5ch + 0.25em); }
+  #sb-root #sb-main .cm-editor .sb-header-inside.sb-line-h6 { --sb-header-hang: calc(6ch + 0.25em); }
+}
+
 #sb-root .sb-strong {
   font-weight: var(--bl-semibold);
 }
