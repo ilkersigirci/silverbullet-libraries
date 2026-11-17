@@ -619,6 +619,12 @@ html #sb-root {
 #sb-root ::selection {
   background-color: var(--bl-text-selection);
 }
+/* Keep the translucent selection visible over opaque code and quote backgrounds.
+   CodeMirror sets the layer's z-index inline; the cursor layer stays above it. */
+#sb-root #sb-main .cm-editor .cm-selectionLayer {
+  z-index: 1 !important;
+  pointer-events: none;
+}
 
 /* Highlight ==text== */
 #sb-root #sb-main .cm-editor .sb-highlight {
